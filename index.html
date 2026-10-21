@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ece8fb" />
+    <title>Персональная крипто-стратегия</title>
+    <link rel="stylesheet" href="style.css" />
+    <noscript>
+      <style>
+        .quiz {
+          display: none;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <noscript>
+      <p class="nojs">
+        Для прохождения квиза включите JavaScript в настройках браузера.
+      </p>
+    </noscript>
+
+    <main class="quiz">
+      <h1 class="quiz__title">
+        Квиз: подберём персональную стратегию в крипте
+      </h1>
+
+      <header class="quiz__header">
+        <button
+          type="button"
+          id="back-btn"
+          class="quiz__back"
+          aria-label="Назад"
+          hidden
+        >
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path
+              d="M15 5l-7 7 7 7"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <div
+          id="progress"
+          class="progress"
+          role="progressbar"
+          aria-label="Прогресс"
+          aria-valuemin="1"
+          aria-valuemax="4"
+          aria-valuenow="1"
+        >
+          <i id="progress-fill" class="progress__fill"></i>
+        </div>
+        <span id="count" class="quiz__count">1 из 4</span>
+      </header>
+
+      <section class="step" aria-labelledby="t1">
+        <h2 id="t1" class="step__title" tabindex="-1">Твой пол?</h2>
+        <div
+          class="options options--cards"
+          role="radiogroup"
+          aria-labelledby="t1"
+        >
+          <label class="option option--card">
+            <input type="radio" name="gender" value="male" />
+            <svg class="option__icon" viewBox="0 0 64 64" aria-hidden="true">
+              <circle cx="32" cy="20" r="11" />
+              <path d="M10 58c0-13 9-22 22-22s22 9 22 22z" />
+            </svg>
+            <span class="option__label">Мужской</span>
+          </label>
+
+          <label class="option option--card">
+            <input type="radio" name="gender" value="female" />
+            <svg class="option__icon" viewBox="0 0 64 64" aria-hidden="true">
+              <circle cx="32" cy="18" r="10" />
+              <path
+                d="M32 30c-8 0-12 6-14 14l-5 14h38l-5-14c-2-8-6-14-14-14z"
+              />
+            </svg>
+            <span class="option__label">Женский</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="step" aria-labelledby="t2">
+        <h2 id="t2" class="step__title" tabindex="-1">Сколько тебе лет?</h2>
+        <div class="options" role="radiogroup" aria-labelledby="t2">
+          <label class="option">
+            <input
+              class="option__input"
+              type="radio"
+              name="age"
+              value="18-25"
+            />
+            <span class="option__label">18–25</span>
+          </label>
+
+          <label class="option">
+            <input
+              class="option__input"
+              type="radio"
+              name="age"
+              value="26-35"
+            />
+            <span class="option__label">26–35</span>
+          </label>
+
+          <label class="option">
+            <input
+              class="option__input"
+              type="radio"
+              name="age"
+              value="36-45"
+            />
+            <span class="option__label">36–45</span>
+          </label>
+
+          <label class="option">
+            <input class="option__input" type="radio" name="age" value="46+" />
+            <span class="option__label">45+</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="step" aria-labelledby="t3">
+        <h2 id="t3" class="step__title" tabindex="-1">Твоя основная цель?</h2>
+        <div class="options" role="radiogroup" aria-labelledby="t3">
+          <label class="option">
+            <input
+              class="option__input"
+              type="radio"
+              name="goal"
+              value="profit"
+            />
+            <span class="option__label">Максимальная прибыль</span>
+          </label>
+
+          <label class="option">
+            <input
+              class="option__input"
+              type="radio"
+              name="goal"
+              value="safety"
+            />
+            <span class="option__label">Сохранение капитала</span>
+          </label>
+
+          <label class="option">
+            <input
+              class="option__input"
+              type="radio"
+              name="goal"
+              value="learning"
+            />
+            <span class="option__label">Обучение и опыт</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="step step--center" aria-labelledby="t4">
+        <h2 id="t4" class="step__title" tabindex="-1">
+          Подбираем для тебя результат...
+        </h2>
+        <div id="candles" class="loader__candles" aria-hidden="true"></div>
+        <div class="loader__meter">
+          <i id="meter-fill" class="loader__fill"></i>
+        </div>
+        <p id="percent" class="loader__percent">0%</p>
+      </section>
+
+      <section class="step step--center" aria-labelledby="t5">
+        <div class="coin" aria-hidden="true">₿</div>
+        <h2 id="t5" class="step__title" tabindex="-1">
+          Готово! Твоё персональное предложение
+        </h2>
+        <p class="step__text">
+          Мы учли твои ответы и подобрали подходящий формат старта
+        </p>
+        <a id="offer-link" class="cta" href="{offer}">Получить результат</a>
+        <p class="note">
+          Криптовалюты - рискованный актив: стоимость может сильно варьироваться
+          (как расти, так и падать).
+        </p>
+      </section>
+    </main>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

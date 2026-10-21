@@ -1,0 +1,454 @@
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('fonts/PlusJakartaSans-Variable.woff2') format('woff2');
+  font-weight: 400 800;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: light;
+  background: #ece8fb;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  color: #3b3566;
+  font-family:
+    'Plus Jakarta Sans',
+    'Manrope',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Фон: размытые цветные пятна */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(
+      460px 360px at 12% 8%,
+      rgba(217, 70, 239, 0.28),
+      transparent 70%
+    ),
+    radial-gradient(
+      520px 400px at 92% 20%,
+      rgba(107, 140, 255, 0.32),
+      transparent 70%
+    ),
+    radial-gradient(
+      520px 420px at 50% 100%,
+      rgba(124, 77, 255, 0.22),
+      transparent 70%
+    );
+}
+
+.nojs {
+  max-width: 480px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fde2e2;
+  color: #7a1d1d;
+  text-align: center;
+}
+
+/* ===== quiz ===== */
+.quiz {
+  width: 100%;
+  max-width: 480px;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(124, 77, 255, 0.18);
+}
+
+/* h1 в виде аккуратного фиолетового бейджа */
+.quiz__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: rgba(124, 77, 255, 0.1);
+  border: 1px solid rgba(124, 77, 255, 0.2);
+  color: #7c4dff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
+
+.quiz__title::before {
+  content: '✨';
+  font-size: 12px;
+}
+
+.quiz__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.quiz__back {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd6f7;
+  border-radius: 50%;
+  background: #fff;
+  color: #1f1250;
+  cursor: pointer;
+}
+
+.quiz__back[hidden] {
+  display: grid;
+  visibility: hidden;
+}
+
+.quiz__back:focus-visible {
+  outline: 2px solid #7c4dff;
+  outline-offset: 2px;
+}
+
+.quiz__count {
+  font-size: 13px;
+  font-weight: 600;
+  color: #7d77a8;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== progress ===== */
+.progress {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: #ddd6f7;
+  overflow: hidden;
+}
+
+.progress__fill {
+  display: block;
+  height: 100%;
+  width: 25%;
+  background: linear-gradient(90deg, #6b8cff, #7c4dff 55%, #d946ef);
+  transition: width 0.3s ease;
+}
+
+/* ===== step ===== */
+.step {
+  display: none;
+}
+
+.step--active {
+  display: block;
+  animation: step-in 0.25s ease;
+}
+
+.step--center {
+  text-align: center;
+}
+
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+}
+
+.step__title {
+  margin-bottom: 20px;
+  color: #1f1250;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  outline: 0;
+}
+
+.step__text {
+  color: #7d77a8;
+}
+
+/* ===== options / option ===== */
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.options--cards {
+  grid-template-columns: 1fr 1fr;
+}
+
+.option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
+  padding: 14px 18px;
+  border: 1px solid #ddd6f7;
+  border-radius: 18px;
+  background: #fff;
+  color: #1f1250;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.option--card {
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 12px;
+  text-align: center;
+}
+
+/* Скрываем стандартный радио-кружок внутри карточек выбора пола */
+.option--card input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.option input[type='radio'] {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  accent-color: #7c4dff;
+  cursor: pointer;
+}
+
+.option svg {
+  width: 64px;
+  height: 64px;
+  fill: #c9c0f0;
+  transition: fill 0.2s;
+}
+
+/* Выбранный вариант (без дублирующего box-shadow и двойных рамок) */
+.option:has(input:checked),
+.option.option--selected {
+  border-color: #7c4dff;
+  background: #f3eeff;
+  box-shadow: 0 8px 24px rgba(124, 77, 255, 0.22);
+}
+
+.option:has(input:checked) svg,
+.option.option--selected svg {
+  fill: #7c4dff;
+}
+
+/* Обводка при фокусе — ТОЛЬКО при навигации с клавиатуры (Tab) */
+.option:has(input:focus-visible) {
+  outline: 2px solid #7c4dff;
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .option:hover {
+    border-color: #7c4dff;
+  }
+}
+
+/* ===== loader ===== */
+.loader__candles {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  height: 96px;
+  margin: 8px 0 24px;
+}
+
+.loader__candle {
+  position: relative;
+  width: 12px;
+  height: var(--h);
+  border-radius: 4px;
+  background: linear-gradient(180deg, #d946ef, #7c4dff);
+  opacity: 0;
+  transform: scaleY(0.2);
+  transform-origin: bottom;
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+}
+
+.loader__candle::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -8px;
+  bottom: -8px;
+  width: 2px;
+  margin-left: -1px;
+  background: inherit;
+}
+
+.loader__candle--down {
+  background: #c9c0f0;
+}
+
+.loader__candle--on {
+  opacity: 1;
+  transform: none;
+}
+
+.loader__meter {
+  height: 8px;
+  border-radius: 4px;
+  background: #ddd6f7;
+  overflow: hidden;
+}
+
+.loader__fill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #6b8cff, #7c4dff 55%, #d946ef);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.loader__percent {
+  margin-top: 12px;
+  color: #1f1250;
+  font-size: 32px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== coin / cta / note (финал) ===== */
+.coin {
+  width: 96px;
+  height: 96px;
+  margin: 4px auto 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 32% 28%,
+    #fff 0,
+    #f5b8ff 28%,
+    #7c4dff 68%,
+    #4a22c9
+  );
+  box-shadow:
+    inset 0 -8px 16px rgba(74, 34, 201, 0.35),
+    0 12px 40px rgba(124, 77, 255, 0.5);
+  color: #fff;
+  font:
+    800 44px/1 system-ui,
+    sans-serif;
+  animation: coin-float 3s ease-in-out infinite;
+}
+
+@keyframes coin-float {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.cta {
+  display: block;
+  margin-top: 26px;
+  padding: 17px;
+  border-radius: 999px;
+  background: #130f2e;
+  color: #fff;
+  font-weight: 700;
+  font-size: 17px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 10px 28px rgba(19, 15, 46, 0.28);
+  transition:
+    transform 0.15s,
+    background 0.2s;
+}
+
+.cta:focus-visible {
+  outline: 2px solid #7c4dff;
+  outline-offset: 2px;
+}
+
+.cta:active {
+  transform: scale(0.98);
+}
+
+@media (hover: hover) {
+  .cta:hover {
+    background: #2a2260;
+  }
+}
+
+.note {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #7d77a8;
+}
+
+/* ===== адаптив ===== */
+@media (max-width: 360px) {
+  .quiz {
+    padding: 16px;
+  }
+  .step__title {
+    font-size: 22px;
+  }
+  .option {
+    padding: 12px 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .quiz {
+    max-width: 540px;
+    padding: 34px;
+  }
+  .step__title {
+    font-size: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
